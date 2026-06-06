@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 
-from predict import predict_sentiment
+from .predict import predict_sentiment
 
 app = Flask(__name__)
 
