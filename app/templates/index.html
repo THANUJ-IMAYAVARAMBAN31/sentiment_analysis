@@ -1,43 +1,60 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>Sentiment Analysis</title>
+    <title>IMDb Sentiment Analysis</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body>
 
-<h1>Sentiment Analysis</h1>
+<div class="container">
 
-<form method="POST">
+    <h1>Sentiment Analysis</h1>
 
-<textarea
-name="review"
-rows="8"
-cols="80"
-placeholder="Enter a sentences here">
-</textarea>
+    <p class="subtitle">
+        Enter a sentences and predict whether the sentiment is positive or negative.
+    </p>
 
-<br><br>
+    <form method="POST">
 
-<button type="submit">
-Predict
-</button>
+        <textarea
+            name="review"
+            placeholder="Write your sentences here..."
+            required></textarea>
 
-</form>
+        <div class="button-container">
+            <button type="submit">
+                Analyze Sentiment
+            </button>
+        </div>
 
-{% if result %}
+    </form>
 
-<h2>
-Prediction:
-{{ result.sentiment }}
-</h2>
+    {% if result %}
 
-<p>
-Confidence:
-{{ result.confidence }}%
-</p>
+        <div class="result-card {% if result.sentiment == 'Positive' %}positive{% else %}negative{% endif %}">
 
-{% endif %}
+            <div class="result-title">
+                {{ result.sentiment }}
+            </div>
+
+            <div class="confidence">
+                Confidence: {{ result.confidence }}%
+            </div>
+
+        </div>
+
+    {% endif %}
+
+    <div class="footer">
+        Built using TF-IDF + Logistic Regression
+    </div>
+
+</div>
 
 </body>
 </html>
